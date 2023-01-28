@@ -5,7 +5,6 @@ services:
       - "./db.sqllite3:/var/lib/mysql/"
     ports:
       - "3306:3306"
-    restart: on-failure
     environment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
@@ -20,7 +19,6 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-    restart: on-failure
     environment:
       - MYSQL_DATABASE=mysql
       - MYSQL_USER=mysql
