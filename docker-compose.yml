@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mysql
+    volumes:
+      - "./db.sqllite3:/var/lib/mysql/"
+    ports:
+      - "3306:3306"
+    # restart: always
+    environment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_HOST=''
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+    depends_on:
+      - db
