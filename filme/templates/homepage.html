@@ -3,7 +3,7 @@
 
 
 {% block titulo %}
-HomePage Hashflix
+Projeto Django - Netflix
 {% endblock %}
 
 {% block head %}
@@ -17,22 +17,23 @@ HomePage Hashflix
 {% endblock %}
 
 {% block content %}
-    <header class="min-h-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'images/background_netflix.jpg' %}')">
+    <header class="min-h-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat bg-cover"  style="background-image: url('{% static 'images/background_netflix.jpg' %}');   background-size: cover;
+}">
         <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
 
             <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 text-center">
-                Filmes e séries da Hashtag, tudo em um só lugar.
+                Filmes, séries e muito mais. Sem limites. 
             </h1>
             <h3 class="text-xl md:text-xl py-5">
                 Assista onde quiser. Cancele quando quiser.
             </h3>
             <h4 class="text-sm md:text-lg pb-3">
-                Quer começar? Coloque seu e-mail abaixo para acessar.
+                Quer assistir? Informe seu email para criar ou reiniciar sua assinatura.
             </h4>
 
             <div class="w-full flex justify-center">
                 <div class="flex justify-center items-center w-11/12 md:w-10/12">
-                    <form method="post" class="w-6/12 justify-center">
+                    <form method="post" class="justify-center">
                         {% csrf_token %}
                         <div class="flex flex-grow items-stretch">
                             {{ form }}
@@ -53,10 +54,10 @@ HomePage Hashflix
     <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
         <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10 ">
             <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Enjoy on your TV.
+                Aproveite na TV.
             </h2>
             <h5 class="md:text-xl text-lg">
-                Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.
+                Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
             </h5>
         </div>
         <div class='md:w-1/2 flex justify-center items-center'>
@@ -71,10 +72,10 @@ HomePage Hashflix
 
         <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
             <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Download your shows to watch offline.
+                Baixe séries para assistir offline.
             </h2>
             <h5 class="md:text-xl text-lg">
-                Save your favorites easily and always have something to watch.
+                Disponível em todos os planos, exceto no Básico com anúncios.
             </h5>
         </div>
 
@@ -83,10 +84,10 @@ HomePage Hashflix
     <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
         <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
             <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Create profiles for kids.
+                Crie perfis para crianças.
             </h2>
             <h5 class="md:text-xl text-lg">
-                Send kids on adventures with their favorite characters in a space made just for them—free with your membership.
+                Deixe as crianças se aventurarem com seus personagens favoritos em um espaço feito só para elas, sem pagar a mais por isso.
             </h5>
         </div>
         <div class='md:w-1/2 flex justify-center items-center'>
