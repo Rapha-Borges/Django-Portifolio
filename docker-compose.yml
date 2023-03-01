@@ -1,4 +1,19 @@
+version: '3.7'
 services:
+  proxy:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: 'nginx-proxy-manager'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - proxy_manager
+
   db:
     image: mysql
     volumes:
@@ -10,6 +25,8 @@ services:
       - MYSQL_USER=mysql
       - MYSQL_ROOT_PASSWORD=MYSQL_ROOT_PASSWORD
       - MYSQL_HOST=''
+    networks:
+      - proxy_manager
 
   web:
     build: .
@@ -24,3 +41,9 @@ services:
       - MYSQL_PASSWORD=mysql
     depends_on:
       - db
+    networks:
+      - proxy_manager
+
+networks:
+  proxy_manager:
+    name: proxy_manager
