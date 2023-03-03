@@ -11,13 +11,13 @@ cloudinary==1.29.0
 crashtest==0.3.1
 crispy-bootstrap5==0.6
 cryptography==3.4.8
-distlib==0.3.2
+distlib==0.3.6
 dj-database-url==0.5.0
 Django==4.0.4
 django-cloudinary-storage==0.3.0
 django-crispy-forms==1.14.0
 docopt==0.6.2
-filelock==3.0.12
+filelock==3.9.0
 gunicorn==20.1.0
 html5lib==1.1
 idna==3.2
@@ -29,10 +29,10 @@ packaging==20.9
 pastel==0.2.1
 pexpect==4.8.0
 Pillow==9.1.0
-pipenv==2021.5.29
+pipenv==2023.2.18
 pipreqs==0.4.11
 pkginfo==1.7.1
-platformdirs==2.3.0
+platformdirs
 poetry==1.1.8
 poetry-core==1.0.4
 psycopg2-binary==2.9.3
@@ -49,7 +49,7 @@ six==1.16.0
 sqlparse==0.4.2
 tomlkit==0.7.2
 urllib3==1.26.6
-virtualenv==20.7.2
+virtualenv==20.17.1
 virtualenv-clone==0.5.6
 webencodings==0.5.1
 whitenoise==6.0.0

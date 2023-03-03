@@ -2,3 +2,5 @@
 .DS_Store
 db.sqllite3/
 staticfiles/
+data/
+letsencrypt/
