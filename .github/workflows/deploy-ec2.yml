@@ -29,5 +29,3 @@ jobs:
             cd Django-Portifolio
             git pull
             docker-compose up -d
-
-
