@@ -21,6 +21,14 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY_PEM" > ~/.ssh/id_rsa.pem
           chmod 600 ~/.ssh/id_rsa.pem
+      
+      - name: Debugging step
+        run: |
+          ls -la ~/.ssh
+          echo "**************************"
+          echo "Contents of SSH_PRIVATE_KEY_PEM:"
+          echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}"
+
 
       - name: Install SSH client
         run: sudo apt-get install -y ssh
@@ -33,8 +41,6 @@ jobs:
           key_path: ~/.ssh/id_rsa.pem
           port: 22
           script: |
-            ls -la ~/.ssh
-            echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}"
             cd Django-Portifolio
             git pull
             docker-compose up -d
