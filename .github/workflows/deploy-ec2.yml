@@ -39,4 +39,5 @@ jobs:
 
       - name: SSH to Server
         run: |
+          cat ~/.ssh/id_rsa
           ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.EC2_INSTANCE_HOST }} "cd Django-Portifolio && git pull && docker-compose up -d"
