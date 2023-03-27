@@ -10,16 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Install SSH client
-        run: sudo apt-get install -y ssh
-      - name: Copy Docker Compose files to EC2 instance
+      - name: Copy repository to EC2 instance
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.EC2_INSTANCE_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./docker-compose.yml"
-          target: ~/docker-compose.yml
+          source: .
+          target: ~/
       - name: SSH to EC2 instance and run Docker Compose
         uses: appleboy/ssh-action@master
         with:
@@ -30,3 +28,4 @@ jobs:
           script: |
             cd ~
             docker-compose up -d
+
