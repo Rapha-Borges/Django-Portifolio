@@ -29,18 +29,13 @@ jobs:
           echo "Contents of SSH_PRIVATE_KEY_PEM:"
           echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}"
 
-
       - name: Install SSH client
         run: sudo apt-get install -y ssh
 
-      - name: SSH to EC2 instance and deploy changes
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_INSTANCE_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key_path: ~/.ssh/id_rsa.pem
-          port: 22
-          script: |
-            cd Django-Portifolio
-            git pull
-            docker-compose up -d
+      - name: SSH to Server
+        run: |
+          ssh -i ~/.ssh/id_rsa.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}
+          cd Django-Portifolio
+          git pull
+          docker-compose up -d
+
