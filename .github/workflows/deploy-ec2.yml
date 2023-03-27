@@ -1,45 +1,42 @@
-  name: Deploy to EC2
+name: Deploy to EC2
 
-  on:
-    push:
-      branches:
-        - main
+on:
+  push:
+    branches:
+      - main
 
-  jobs:
-    deploy:
-      runs-on: ubuntu-latest
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-      env:
-        EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_HOST }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-        SSH_USER: ${{ secrets.SSH_USER }}
-        SSH_PRIVATE_KEY_PEM: ${{ secrets.SSH_PRIVATE_KEY_PEM }}
+    env:
+      EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_HOST }}
+      AWS_REGION: ${{ secrets.EC2_INSTANCE_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_PRIVATE_KEY_PEM: ${{ secrets.SSH_PRIVATE_KEY_PEM }}
       
-      steps:
-        - name: Configure SSH Environment
-          env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-          run: |
-            mkdir -p ~/.ssh
-            echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            chmod 700 ~/.ssh
-            eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_rsa
+    steps:
+      - name: Configure SSH Environment
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
 
-        - name: Debugging step
-          run: |
-            ls -la ~/.ssh
-            echo "**************************"
-            echo "Contents of SSH_PRIVATE_KEY_PEM:"
-            echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}"
+      - name: Debugging step
+        run: |
+          ls -la ~/.ssh
+          echo "**************************"
+          echo "Contents of SSH_PRIVATE_KEY_PEM:"
+          echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}"
 
-        - name: Install SSH client
-          run: sudo apt-get install -y ssh
+      - name: Install SSH client
+        run: sudo apt-get install -y ssh
 
-        - name: SSH to Server
-          run: |
-            ssh -i ~/.ssh/id_rsa.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}
-            cd Django-Portifolio
-            git pull
-            docker-compose up -d
+      - name: SSH to Server
+        run: |
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.EC2_INSTANCE_HOST }} "cd Django-Portifolio && git pull && docker-compose up -d"
