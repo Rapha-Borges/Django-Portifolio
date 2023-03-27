@@ -8,22 +8,23 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     env:
       EC2_INSTANCE_IP: ${{ secrets.EC2_INSTANCE_HOST }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
       SSH_USER: ${{ secrets.SSH_USER }}
       SSH_PRIVATE_KEY_PEM: ${{ secrets.SSH_PRIVATE_KEY_PEM }}
-      
+
     steps:
       - name: Save SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}" > ~/.ssh/id_rsa.pem
+          echo "$SSH_PRIVATE_KEY_PEM" > ~/.ssh/id_rsa.pem
           chmod 600 ~/.ssh/id_rsa.pem
 
       - name: Install SSH client
         run: sudo apt-get install -y ssh
+
       - name: SSH to EC2 instance and deploy changes
         uses: appleboy/ssh-action@master
         with:
