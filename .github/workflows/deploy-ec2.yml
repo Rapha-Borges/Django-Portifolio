@@ -18,7 +18,7 @@ jobs:
           host: ${{ secrets.EC2_INSTANCE_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: docker-compose.yml
+          source: ./docker-compose.yml
           target: ~/docker-compose.yml
       - name: SSH to EC2 instance and run Docker Compose
         uses: appleboy/ssh-action@master
