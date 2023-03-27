@@ -32,6 +32,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key_path: ~/.ssh/id_rsa.pem
           port: 22
+          run: |
+            ls -la ~/.ssh
+            echo "${{ secrets.SSH_PRIVATE_KEY_PEM }}"
+
           script: |
             cd Django-Portifolio
             git pull
